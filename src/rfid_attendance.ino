@@ -257,7 +257,7 @@ void terminarClase() {
   // Obtener hora actual (simulado, deberías usar RTC o NTP)
   String hora_fin = "16:00:00"; // Reemplaza con la hora real
 
-  String httpRequestData = "{\"claseId\":" + claseId + ",\"hora_fin\":\"" + hora_fin + "\"}";
+  String httpRequestData = "{\"claseId\":" + claseId + ",\"hora_fin\":\"" + hora_fin + "}";
   Serial.println("Terminando clase: " + httpRequestData);
   int httpResponseCode = http.POST(httpRequestData);
 
@@ -333,12 +333,23 @@ void procesarRespuesta(HTTPClient &http, int httpResponseCode) {
         delay(1000);
         digitalWrite(LED_VERDE, LOW);
       } else if (doc.containsKey("estudiante")) {
-        String nombre = doc["estudiante"]["nombre"].as<String>() + " " + doc["estudiante"]["apellido"].as<String>();
-        mostrarMensaje("Estudiante: " + nombre);
-        digitalWrite(LED_VERDE, HIGH);
-        moverServo();
-        delay(1000);
-        digitalWrite(LED_VERDE, LOW);
+        // SOLO ABRIR PUERTA SI HAY CLASE INICIADA
+        if (claseIniciada) {
+          String nombre = doc["estudiante"]["nombre"].as<String>() + " " + doc["estudiante"]["apellido"].as<String>();
+          mostrarMensaje("Estudiante: " + nombre);
+          digitalWrite(LED_VERDE, HIGH);
+          moverServo();
+          delay(1000);
+          digitalWrite(LED_VERDE, LOW);
+        } else {
+          mostrarMensaje("No hay clase iniciada");
+          digitalWrite(LED_ROJO, HIGH);
+          digitalWrite(BUZZER_PIN, HIGH);
+          delay(1500);
+          digitalWrite(LED_ROJO, LOW);
+          digitalWrite(BUZZER_PIN, LOW);
+          mostrarMensajeInicialAnimado();
+        }
       } else if (doc.containsKey("profesor")) {
         String nombre = doc["profesor"]["nombre"].as<String>() + " " + doc["profesor"]["apellido"].as<String>();
         mostrarMensaje("Profesor: " + nombre);

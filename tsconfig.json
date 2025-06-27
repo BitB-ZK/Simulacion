@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "module": "Preserve", // Conservar el tipo de módulo
-    "strict": true, // Habilitar todas las opciones de comprobación de tipo
-    "moduleDetection": "force", // Forzar la detección de módulos
-    "allowJs": true, // Permitir archivos JS
-    "esModuleInterop": true, // Habilitar interoperabilidad de módulos
-    "isolatedModules": true, // Habilitar la comprobación de módulos independientes,}
-    "resolveJsonModule": true // Habilitar la resolución de módulos JSON
+    "target": "ES2020",
+    "module": "ESNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
   },
-  "include": ["src/**/*"], // Incluir archivos
-  "exclude": ["node_modules", "dist"] // Excluir archivos
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
