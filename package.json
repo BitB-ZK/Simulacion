@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node dist/index.mjs",
     "dev": "tsx watch --clear-screen=false src/index.ts",
-    "build": "pkgroll"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,6 @@
     "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.1",
-    "pkgroll": "^2.5.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
   },
