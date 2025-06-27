@@ -1,11 +1,11 @@
 import mysql, { Pool, RowDataPacket } from "mysql2/promise";
 
 const connectionConfig = {
-  host: "localhost",
+  host: "tramway.proxy.rlwy.net",
   user: "root",
-  password: "1234",
+  password: "oMKFCeGwQnrVkRTBKqxzMsgSDIvoqvFc",
   database: "laboratorio", 
-  port: 3306, 
+  port: 16605, 
 };
 
 export const pool: Pool = mysql.createPool(connectionConfig);
