@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"; // <--- Importa cors
 import path from "path";
 import { fileURLToPath } from "url";
 import homeRoute from "./router/home.route";
@@ -10,7 +11,6 @@ import horarioRoutes from "./router/horario.route";
 import claseRoutes from "./router/clase.route";
 import asistenciaRoutes from "./router/asistencia.route";
 import rfidRoutes from "./router/rfid.route";
-
 
 // Inicializar la conexión a la base de datos
 db()
@@ -24,6 +24,8 @@ console.log("Current directory:", __dirname);
 
 const app = express();
 
+app.use(cors()); // <--- Habilita CORS para cualquier origen
+
 // Middleware para manejar JSON
 app.use(express.json());
 
@@ -36,7 +38,6 @@ app.use("/horarios", horarioRoutes);
 app.use("/clases", claseRoutes);
 app.use("/asistencia", asistenciaRoutes);
 app.use("/rfid", rfidRoutes);
-
 
 const PORT = process.env.PORT || 5000;
 
