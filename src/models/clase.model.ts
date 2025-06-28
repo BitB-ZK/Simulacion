@@ -1,4 +1,4 @@
-import { pool } from "../database/index";
+import { pool } from "../database/index.js";
 
 export const ClaseModel = {
   async create({ horario_id, profesor_id, fecha_clase, hora_inicio_real, hora_fin_real, profesor_asistio }: any) {

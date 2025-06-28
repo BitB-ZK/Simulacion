@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { RfidController } from "../controllers/rfid.controller";
+import { RfidController } from "../controllers/rfid.controller.js";
 
 const router = Router();
 

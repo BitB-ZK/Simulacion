@@ -1,10 +1,10 @@
-import { EstudianteModel } from "../models/estudiante.model";
-import { ProfesorModel } from "../models/profesor.model";
-import { ClaseModel } from "../models/clase.model";
-import { HorarioModel } from "../models/horario.model";
-import { MateriaModel } from "../models/materia.model";
-import { AsistenciaEstudianteModel } from "../models/asistencia.model";
-import { InscripcionModel } from "../models/inscripcion.model";
+import { EstudianteModel } from "../models/estudiante.model.js";
+import { ProfesorModel } from "../models/profesor.model.js";
+import { ClaseModel } from "../models/clase.model.js";
+import { HorarioModel } from "../models/horario.model.js";
+import { MateriaModel } from "../models/materia.model.js";
+import { AsistenciaEstudianteModel } from "../models/asistencia.model.js";
+import { InscripcionModel } from "../models/inscripcion.model.js";
 
 export const RfidController = {
   async getEstudianteByRfid(req: any, res: any) {

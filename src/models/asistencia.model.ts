@@ -1,4 +1,4 @@
-import { pool } from "../database/index";
+import { pool } from "../database/index.js";
 
 export const AsistenciaEstudianteModel = {
   async create({ clase_id, estudiante_id, fecha_hora_entrada }: any) {

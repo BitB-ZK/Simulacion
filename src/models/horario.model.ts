@@ -1,4 +1,4 @@
-import { pool } from "../database/index";
+import { pool } from "../database/index.js";
 
 export const HorarioModel = {
   async create({ materia_id, profesor_id, dia, hora_inicio, hora_fin }: any) {

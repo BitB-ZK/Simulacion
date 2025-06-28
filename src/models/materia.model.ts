@@ -1,4 +1,4 @@
-import { pool } from "../database/index";
+import { pool } from "../database/index.js";
 
 export const MateriaModel = {
   async create({ nombre, descripcion }: any) {

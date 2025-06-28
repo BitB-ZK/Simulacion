@@ -1,4 +1,4 @@
-import { HorarioModel } from "../models/horario.model";
+import { HorarioModel } from "../models/horario.model.js";
 
 export const HorarioController = {
   async create(req: any, res: any) {

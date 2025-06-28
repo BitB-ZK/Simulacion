@@ -1,7 +1,7 @@
-import { AsistenciaEstudianteModel } from "../models/asistencia.model";
-import { ClaseModel } from "../models/clase.model";
-import { MateriaModel } from "../models/materia.model";
-import { ProfesorModel } from "../models/profesor.model";
+import { AsistenciaEstudianteModel } from "../models/asistencia.model.js";
+import { ClaseModel } from "../models/clase.model.js";
+import { MateriaModel } from "../models/materia.model.js";
+import { ProfesorModel } from "../models/profesor.model.js";
 
 export const AsistenciaEstudianteController = {
   async create(req: any, res: any) {

@@ -1,4 +1,4 @@
-import { pool } from "../database/index";
+import { pool } from "../database/index.js";
 
 export const EstudianteModel = {
   async create({ nombre, apellido, cedula, carrera, rfid_id }: any) {

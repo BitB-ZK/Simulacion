@@ -1,4 +1,4 @@
-import { MateriaModel } from "../models/materia.model";
+import { MateriaModel } from "../models/materia.model.js";
 
 export const MateriaController = {
   async create(req: any, res: any) {

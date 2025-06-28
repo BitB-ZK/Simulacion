@@ -1,4 +1,4 @@
-import { pool } from "../database/index";
+import { pool } from "../database/index.js";
 
 export const InscripcionModel = {
   async create({ estudiante_id, materia_id }: any) {

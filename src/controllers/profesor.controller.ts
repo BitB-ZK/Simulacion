@@ -1,4 +1,4 @@
-import { ProfesorModel } from "../models/profesor.model";
+import { ProfesorModel } from "../models/profesor.model.js";
 
 export const ProfesorController = {
   async create(req: any, res: any) {
