@@ -9,7 +9,13 @@ export const AsistenciaEstudianteModel = {
     const [result] = await pool.execute(query, [clase_id, estudiante_id, fecha_hora_entrada]);
     return { id: (result as any).insertId, clase_id, estudiante_id, fecha_hora_entrada };
   },
-
+  async findByClaseAndEstudiante(clase_id: number, estudiante_id: number) {
+    const [rows] = await pool.execute(
+      "SELECT * FROM asistencia_estudiantes WHERE clase_id = ? AND estudiante_id = ?",
+      [clase_id, estudiante_id]
+    );
+    return rows;
+  },
   async findAll() {
     const [rows] = await pool.execute("SELECT * FROM asistencia_estudiantes");
     return rows;

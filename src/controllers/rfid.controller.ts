@@ -104,7 +104,7 @@ export const RfidController = {
   }
 },
 
-  async registrarAsistenciaConRfid(req: any, res: any) {
+    async registrarAsistenciaConRfid(req: any, res: any) {
     try {
       const { rfid, claseId } = req.body;
 
@@ -123,6 +123,20 @@ export const RfidController = {
       const inscripcion = await InscripcionModel.findByEstudianteIdAndMateriaId(estudiante.id, horario.materia_id);
       if (!inscripcion) {
         return res.status(403).json({ ok: false, message: "Estudiante no inscrito en esta materia" });
+      }
+
+      // Validar si ya existe asistencia para este estudiante en esta clase
+      const asistenciasResult = await AsistenciaEstudianteModel.findByClaseAndEstudiante(claseId, estudiante.id);
+      let asistenciasExistentes;
+      if (Array.isArray(asistenciasResult)) {
+        asistenciasExistentes = asistenciasResult[0];
+      } else if (asistenciasResult && 'rows' in asistenciasResult && Array.isArray((asistenciasResult as any).rows)) {
+        asistenciasExistentes = (asistenciasResult as any).rows[0];
+      } else {
+        asistenciasExistentes = undefined;
+      }
+      if (asistenciasExistentes) {
+        return res.status(200).json({ ok: true, message: "El estudiante ya registró su asistencia para esta clase" });
       }
 
       // Registrar la asistencia
@@ -144,6 +158,7 @@ export const RfidController = {
       res.status(500).json({ ok: false, error: error instanceof Error ? error.message : error });
     }
   },
+
    async terminarClase(req: any, res: any) {
     try {
       const { claseId, hora_fin } = req.body;
