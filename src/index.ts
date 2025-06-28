@@ -1,16 +1,17 @@
 import express from "express";
-import cors from "cors"; // <--- Importa cors
+import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import homeRoute from "./router/home.route";
-import { db } from "./database/index";
-import estudianteRoutes from "./router/estudiante.route";
-import profesorRoutes from "./router/profesor.route";
-import materiaRoutes from "./router/materia.route";
-import horarioRoutes from "./router/horario.route";
-import claseRoutes from "./router/clase.route";
-import asistenciaRoutes from "./router/asistencia.route";
-import rfidRoutes from "./router/rfid.route";
+import homeRoute from "./router/home.route.js";
+import { db } from "./database/index.js";
+import estudianteRoutes from "./router/estudiante.route.js";
+import profesorRoutes from "./router/profesor.route.js";
+import materiaRoutes from "./router/materia.route.js";
+import horarioRoutes from "./router/horario.route.js";
+import claseRoutes from "./router/clase.route.js";
+import asistenciaRoutes from "./router/asistencia.route.js";
+import rfidRoutes from "./router/rfid.route.js";
+
 
 // Inicializar la conexión a la base de datos
 db()
