@@ -69,5 +69,14 @@ export const AsistenciaEstudianteController = {
     } catch (error) {
       res.status(500).json({ ok: false, error: error instanceof Error ? error.message : error });
     }
-  }
+  },
+    async getAsistenciaPorClase(req: any, res: any) {
+    try {
+      const claseId = Number(req.params.claseId);
+      const lista = await AsistenciaEstudianteModel.getAsistenciaPorClase(claseId);
+      res.json({ ok: true, estudiantes: lista });
+    } catch (error) {
+      res.status(500).json({ ok: false, error: error instanceof Error ? error.message : error });
+    }
+  },
 };
