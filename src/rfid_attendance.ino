@@ -28,13 +28,13 @@ const char* ssid = "Admin"; // Reemplaza con el nombre de tu red
 const char* password = "123456789"; // Reemplaza con la contraseña de tu red
 
 // Configuración del servidor backend
-const char* serverURL = "http://192.168.16.3:5000/rfid"; // URL base del servidor backend
+const char* serverURL = "https://simulacion-4s0n.onrender.com/rfid"; // URL base del servidor backend
 
 // Configuración de los LEDs y buzzer
 #define LED_ROJO 15 // Pin para el LED rojo (acceso denegado)
 #define LED_VERDE 2 // Pin para el LED verde (acceso concedido)
 #define SERVO_PIN 13 // Pin para el servo motor
-#define BUZZER_PIN 17 // Pin para el buzzer (elige uno disponible en tu ESP32)
+#define BUZZER_PIN 17 // Pin para el buzzer 
 
 // Configuración de los pulsadores
 #define BTN_ABRIR 4   // Pulsador para abrir la puerta desde dentro
@@ -107,7 +107,7 @@ void setup() {
 
 void testConnection() {
   HTTPClient http;
-  http.begin("http://192.168.16.3:5000/home"); // URL de la ruta /home
+  http.begin("https://simulacion-4s0n.onrender.com/home"); // URL de la ruta /home
   int httpResponseCode = http.GET();
 
   Serial.print("Código de respuesta HTTP (prueba /home): ");
@@ -235,9 +235,9 @@ void iniciarClase(String uid) {
   http.begin(endpoint);
   http.addHeader("Content-Type", "application/json");
   
-  // Obtener día y hora actual (simulado, deberías usar un RTC o NTP)
-  String dia = "Lunes"; // Reemplaza con el día actual
-  String hora = "15:00:00"; // Reemplaza con la hora actual
+  // Obtener día y hora actual
+  String dia = "Lunes"; 
+  String hora = "14:00:00"; 
   
   String httpRequestData = "{\"rfid\":\"" + uid + "\",\"dia\":\"" + dia + "\",\"hora\":\"" + hora + "\"}";
   Serial.println("Iniciando clase: " + httpRequestData);
@@ -254,8 +254,8 @@ void terminarClase() {
   http.begin(endpoint);
   http.addHeader("Content-Type", "application/json");
 
-  // Obtener hora actual (simulado, deberías usar RTC o NTP)
-  String hora_fin = "16:00:00"; // Reemplaza con la hora real
+  // Obtener hora actual 
+  String hora_fin = "17:00:00"; 
 
   String httpRequestData = "{\"claseId\":" + claseId + ",\"hora_fin\":\"" + hora_fin + "}";
   Serial.println("Terminando clase: " + httpRequestData);
@@ -287,6 +287,21 @@ void procesarRespuesta(HTTPClient &http, int httpResponseCode) {
 
     DynamicJsonDocument doc(1024);
     deserializeJson(doc, payload);
+
+    // --- NUEVO: Si el mensaje es "El estudiante ya registró su asistencia para esta clase"
+    if (doc.containsKey("message")) {
+      String msg = doc["message"].as<String>();
+      if (msg.indexOf("ya registró su asistencia") != -1) {
+        mostrarMensaje(msg);
+        digitalWrite(LED_VERDE, HIGH);
+        moverServo();
+        delay(1000);
+        digitalWrite(LED_VERDE, LOW);
+        mostrarSummary();
+        return;
+      }
+    }
+    // --- FIN NUEVO
 
     // Mostrar mensaje de error del backend solo si la respuesta no es exitosa
     if ((httpResponseCode != HTTP_CODE_OK && httpResponseCode != HTTP_CODE_CREATED) && doc.containsKey("message")) {
@@ -438,11 +453,11 @@ void mostrarMensajeInicialAnimado() {
   display.setCursor(20, 32);
   display.println("tarjeta");
 
-  // Flecha animada hacia abajo (manual)
-  int baseY = 54 + (flechaFrame % 3); // animación simple
-  display.drawLine(62, baseY, 62, baseY + 6, SSD1306_WHITE); // Línea vertical
-  display.drawLine(58, baseY + 2, 62, baseY + 6, SSD1306_WHITE); // Diagonal izquierda
-  display.drawLine(66, baseY + 2, 62, baseY + 6, SSD1306_WHITE); // Diagonal derecha
+  // Flecha animada hacia abajo
+  int baseY = 54 + (flechaFrame % 3); 
+  display.drawLine(62, baseY, 62, baseY + 6, SSD1306_WHITE); 
+  display.drawLine(58, baseY + 2, 62, baseY + 6, SSD1306_WHITE); 
+  display.drawLine(66, baseY + 2, 62, baseY + 6, SSD1306_WHITE); 
 
   display.display();
 
@@ -487,7 +502,7 @@ void mostrarSummary() {
   display.setTextSize(1);
   display.print("Asistentes: ");
   display.setTextSize(1);
-  display.setCursor(90, 53);
+  display.setCursor(90, 54);
   display.print(cantidadEstudiantes);
 
   display.display();

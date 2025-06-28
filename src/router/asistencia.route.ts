@@ -9,5 +9,6 @@ router.get("/:id", AsistenciaEstudianteController.findById);
 router.put("/:id", AsistenciaEstudianteController.update);
 router.delete("/:id", AsistenciaEstudianteController.delete);
 router.get("/summary/:claseId", AsistenciaEstudianteController.getAttendanceSummary);
+router.get("/clase/:claseId", AsistenciaEstudianteController.getAsistenciaPorClase);
 
 export default router;

@@ -56,4 +56,20 @@ export const AsistenciaEstudianteModel = {
     const [rows] = await pool.execute(query, [claseId]);
     return (rows as any[])[0];
   },
+  async getAsistenciaPorClase(clase_id: number) {
+    const query = `
+      SELECT 
+        e.id AS estudiante_id,
+        e.nombre,
+        e.apellido,
+        e.cedula,
+        a.fecha_hora_entrada
+      FROM asistencia_estudiantes a
+      JOIN estudiantes e ON a.estudiante_id = e.id
+      WHERE a.clase_id = ?
+      ORDER BY a.fecha_hora_entrada ASC
+    `;
+    const [rows] = await pool.execute(query, [clase_id]);
+    return rows;
+  },
 };
