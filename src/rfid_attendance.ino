@@ -257,7 +257,8 @@ void terminarClase() {
   // Obtener hora actual 
   String hora_fin = "17:00:00"; 
 
-  String httpRequestData = "{\"claseId\":" + claseId + ",\"hora_fin\":\"" + hora_fin + "}";
+  // CORREGIDO: Se agregó la comilla de cierre en hora_fin
+  String httpRequestData = "{\"claseId\":" + claseId + ",\"hora_fin\":\"" + hora_fin + "\"}";
   Serial.println("Terminando clase: " + httpRequestData);
   int httpResponseCode = http.POST(httpRequestData);
 

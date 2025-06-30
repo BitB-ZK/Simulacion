@@ -11,7 +11,7 @@ import horarioRoutes from "./router/horario.route.js";
 import claseRoutes from "./router/clase.route.js";
 import asistenciaRoutes from "./router/asistencia.route.js";
 import rfidRoutes from "./router/rfid.route.js";
-
+import incripcionRoutes from "./router/inscripcion.route.js";
 
 // Inicializar la conexión a la base de datos
 db()
@@ -39,6 +39,7 @@ app.use("/horarios", horarioRoutes);
 app.use("/clases", claseRoutes);
 app.use("/asistencia", asistenciaRoutes);
 app.use("/rfid", rfidRoutes);
+app.use("/inscripciones", incripcionRoutes);
 
 const PORT = process.env.PORT || 5000;
 
