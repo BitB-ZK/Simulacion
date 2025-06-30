@@ -1,6 +1,6 @@
 // Ejemplo de rutas
 import { Router } from "express";
-import { InscripcionController } from "../controllers/inscripcion.controller";
+import { InscripcionController } from "../controllers/inscripcion.controller.js";
 
 const router = Router();
 
