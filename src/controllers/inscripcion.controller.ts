@@ -6,18 +6,18 @@ export const InscripcionController = {
     try {
       const { estudiante_id, materia_id } = req.body;
       const inscripcion = await InscripcionModel.create({ estudiante_id, materia_id });
-      res.status(201).json(inscripcion);
+      res.status(201).json({ ok: true, inscripcion });
     } catch (error) {
-      res.status(500).json({ message: "Error al crear inscripción", error });
+      res.status(500).json({ ok: false, message: "Error al crear inscripción", error });
     }
   },
 
   async findAll(req: any, res: any) {
     try {
       const inscripciones = await InscripcionModel.findAll();
-      res.json(inscripciones);
+      res.json({ ok: true, inscripciones });
     } catch (error) {
-      res.status(500).json({ message: "Error al obtener inscripciones", error });
+      res.status(500).json({ ok: false, message: "Error al obtener inscripciones", error });
     }
   },
 
@@ -26,11 +26,11 @@ export const InscripcionController = {
       const { id } = req.params;
       const inscripcion = await InscripcionModel.findById(Number(id));
       if (!inscripcion) {
-        return res.status(404).json({ message: "Inscripción no encontrada" });
+        return res.status(404).json({ ok: false, message: "Inscripción no encontrada" });
       }
-      res.json(inscripcion);
+      res.json({ ok: true, inscripcion });
     } catch (error) {
-      res.status(500).json({ message: "Error al buscar inscripción", error });
+      res.status(500).json({ ok: false, message: "Error al buscar inscripción", error });
     }
   },
 
@@ -42,11 +42,11 @@ export const InscripcionController = {
         Number(materia_id)
       );
       if (!inscripcion) {
-        return res.status(404).json({ message: "Inscripción no encontrada" });
+        return res.status(404).json({ ok: false, message: "Inscripción no encontrada" });
       }
-      res.json(inscripcion);
+      res.json({ ok: true, inscripcion });
     } catch (error) {
-      res.status(500).json({ message: "Error al buscar inscripción", error });
+      res.status(500).json({ ok: false, message: "Error al buscar inscripción", error });
     }
   },
 
@@ -54,9 +54,9 @@ export const InscripcionController = {
     try {
       const { id } = req.params;
       await InscripcionModel.delete(Number(id));
-      res.json({ message: "Inscripción eliminada" });
+      res.json({ ok: true, message: "Inscripción eliminada" });
     } catch (error) {
-      res.status(500).json({ message: "Error al eliminar inscripción", error });
+      res.status(500).json({ ok: false, message: "Error al eliminar inscripción", error });
     }
   },
 };
